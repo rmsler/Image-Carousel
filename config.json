@@ -1,0 +1,20 @@
+{
+        "carousel":[
+        {
+            "Name": "Image1",
+            "Text": "Led Zeppelin"
+        },
+        {
+            "Name": "Image2",
+            "Text": "Guns and Roses"
+        },
+        {
+            "Name": "Image3",
+            "Text": "Metallica"
+        },
+        {
+            "Name": "Image4",
+            "Text": "Scoprions"
+        }
+    ]
+}
