@@ -1,19 +1,23 @@
 {
         "carousel":[
         {
-            "Name": "Image1",
+            "Name": "LZ",
+            "Location": "./images/LZ.jpg",
             "Text": "Led Zeppelin"
         },
         {
-            "Name": "Image2",
+            "Name": "GNR",
+            "Location": "./images/GNR.jpg",
             "Text": "Guns and Roses"
         },
         {
-            "Name": "Image3",
+            "Name": "Mtl",
+            "Location": "./images/MTL.jpg",
             "Text": "Metallica"
         },
         {
-            "Name": "Image4",
+            "Name": "Scp",
+            "Location": "./images/SCP.jpg",
             "Text": "Scoprions"
         }
     ]
