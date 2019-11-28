@@ -5,6 +5,7 @@ function Image(config) {
     }
     this.name = config.Name;
     this.text = config.Text;
+    this.location = config.Location;
     this.domReference = null;
 };
 Object.assign(Image.prototype, {
@@ -24,14 +25,21 @@ Object.assign(Image.prototype, {
         let label = "image" + labelNo;
         let domElement = document.createElement("div");
         domElement.classList.add("container");
+        
+        domElement.classList.add("slides");
+        domElement.classList.add("fade");
         let content = document.createElement("img");
         content.classList.add(this.name);
-        content.classList.add("image");
         content.classList.add(label);
-        content.href = this.text;
+        content.setAttribute("src", this.location);
         let textchild = document.createTextNode(this.name);
         content.appendChild(textchild);
+        let text = document.createElement("div");
+        text.classList.add("text");
+        let insideText = document.createTextNode(this.text);
+        text.appendChild(insideText);
         $(domElement).append(content);
+        $(domElement).append(text);
         this.domReference = domElement;
         return domElement
     }

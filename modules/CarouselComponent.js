@@ -1,4 +1,5 @@
 import {Image} from "./Image.js";
+import {MovementButtons} from "./MovementButtons.js";
 
 function CarouselComponent(imagesArray){
     if (!(this instanceof CarouselComponent)) { 
@@ -6,6 +7,7 @@ function CarouselComponent(imagesArray){
     }
     this.imagesArray = imagesArray;
     this.imgArray = [];
+    this.activeSlide = 1;
     this.mode = null;
     // this.init();
 }
@@ -36,6 +38,14 @@ Object.assign(CarouselComponent.prototype, {
             let image = value.render(index);
             $(wrapper).append(image);
         });
+        let previous = new MovementButtons("prev");
+        let previousButton = previous.render(this.activeSlide);
+        let next = new MovementButtons("next");
+        let nextButton = next.render(this.activeSlide);
+        $(wrapper).append(previousButton);
+        $(wrapper).append(nextButton);
+        next.showSlides(this.activeSlide);
+        // MovementButtons.render("next");
     },
 
     clickimage : function(element) {
