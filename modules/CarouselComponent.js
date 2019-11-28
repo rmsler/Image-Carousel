@@ -7,7 +7,7 @@ function CarouselComponent(imagesArray){
     }
     this.imagesArray = imagesArray;
     this.imgArray = [];
-    this.activeSlide = 1;
+    this.activeSlide = 0;
     this.mode = null;
     // this.init();
 }
@@ -44,8 +44,6 @@ Object.assign(CarouselComponent.prototype, {
         let nextButton = next.render(this.activeSlide);
         $(wrapper).append(previousButton);
         $(wrapper).append(nextButton);
-        next.showSlides(this.activeSlide);
-        // MovementButtons.render("next");
     },
 
     clickimage : function(element) {

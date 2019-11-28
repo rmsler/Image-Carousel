@@ -39,12 +39,14 @@ Object.assign(MovementButtons.prototype, {
         if (n > slides.length) {this.activeSlide = 1}    
         if (n < 1) {this.activeSlide = slides.length}
         for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";  
+            slides[i].style.display = "none";   
+            slides[i].style.opacity = "0"; 
         }
         // for (i = 0; i < dots.length; i++) {
         //     dots[i].className = dots[i].className.replace(" active", "");
         // }
         slides[this.activeSlide - 1].style.display = "block";  
+        slides[this.activeSlide - 1].style.opacity = "1";  
         // dots[this.activeSlide-1].className += " active";
     }
 });
