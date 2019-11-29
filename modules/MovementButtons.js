@@ -1,10 +1,10 @@
 
-function MovementButtons(label, showSlidesCallback){
+function MovementButtons(label, showSlideCallback){
     if (!(this instanceof MovementButtons)) { 
         return new MovementButtons(imagesArray);
     }
     this.label = label;
-    this.showSlidesCallback = showSlidesCallback;
+    this.showSlideCallback = showSlideCallback;
 }
 
 
@@ -16,7 +16,7 @@ Object.assign(MovementButtons.prototype, {
         
         let insideText = document.createTextNode(directionImage);
         button.appendChild(insideText); 
-        button.addEventListener("click", this.showSlidesCallback);
+        button.addEventListener("click", this.showSlideCallback);
         return button;
     },
 });
