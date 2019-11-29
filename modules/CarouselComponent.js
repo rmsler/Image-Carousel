@@ -1,5 +1,6 @@
 import {Image} from "./Image.js";
 import {MovementButtons} from "./MovementButtons.js";
+import { MovementDots } from "./MovementDots.js";
 
 function CarouselComponent(imagesArray){
     if (!(this instanceof CarouselComponent)) { 
@@ -40,16 +41,28 @@ Object.assign(CarouselComponent.prototype, {
 
         let nextSlidesCallback = this.nextSlides.bind(this);
         let previousSlidesCallback = this.previousSlides.bind(this);
+        let currentSlideCallback = this.currentSlide.bind(this);
         //add previous button
-        let previous = new MovementButtons("prev", nextSlidesCallback);
+        let previous = new MovementButtons("prev", previousSlidesCallback);
         let previousButton = previous.render();
         $(wrapper).append(previousButton);
         // add next button
-        let next = new MovementButtons("next", previousSlidesCallback);
+        let next = new MovementButtons("next", nextSlidesCallback);
         let nextButton = next.render();
         $(wrapper).append(nextButton);
-        this.showSlides(this.activeSlide);
+        //add dots
+        console.log(array);
+        let dotsWrapper = document.createElement("div");
+        dotsWrapper.style.textAlign = "center";
+        for (let i = 1; i<= array.length; i++){
+            let dot = new MovementDots(i, currentSlideCallback);
+            let dotElement = dot.render();
+            $(dotsWrapper).append(dotElement);
+        }
+        $(wrapper).append(dotsWrapper);
+        this.currentSlide(this.activeSlide);
     },
+    
     nextSlides : function() {
         this.showSlides(this.activeSlide += 1);
     },
@@ -63,19 +76,19 @@ Object.assign(CarouselComponent.prototype, {
     showSlides : function(n) {
         var i;
         var slides = document.getElementsByClassName("container");
-        // var dots = document.getElementsByClassName("dot");
+        var dots = document.getElementsByClassName("dot");
         if (n > slides.length) {this.activeSlide = 1}    
         if (n < 1) {this.activeSlide = slides.length}
         for (i = 0; i < slides.length; i++) {
             slides[i].style.display = "none";   
             slides[i].style.opacity = "0"; 
         }
-        // for (i = 0; i < dots.length; i++) {
-        //     dots[i].className = dots[i].className.replace(" active", "");
-        // }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
         slides[this.activeSlide - 1].style.display = "block";  
         slides[this.activeSlide - 1].style.opacity = "1";  
-        // dots[this.activeSlide-1].className += " active";
+        dots[this.activeSlide-1].className += " active";
     }
 });
 
