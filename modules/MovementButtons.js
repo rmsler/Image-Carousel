@@ -1,54 +1,24 @@
 
-function MovementButtons(position){
+function MovementButtons(label, showSlidesCallback){
     if (!(this instanceof MovementButtons)) { 
         return new MovementButtons(imagesArray);
     }
-    this.position = position;
-    this.activeSlide = null;
+    this.label = label;
+    this.showSlidesCallback = showSlidesCallback;
 }
 
 
 Object.assign(MovementButtons.prototype, {
-    render : function(activeSlide) {
-        // $.each(array, function (index, value){
-        //     let image = value.render(index);
-        //     $(wrapper).append(image);
-        // });
-        
-        this.activeSlide = activeSlide;
+    render : function() {
         let button = document.createElement("a");
-        button.classList.add(this.position);
-        // let directionImage = this.position === "prev" ? "&#10094;" : "&#10095;" ;
-        let directionImage = this.position === "prev" ? "❮" : "❯" ;
+        button.classList.add(this.label);
+        let directionImage = this.label === "prev" ? "❮" : "❯" ;
         
         let insideText = document.createTextNode(directionImage);
         button.appendChild(insideText); 
-        button.addEventListener("click", this.plusSlides(this.position === "prev" ? -1 : 1));
+        button.addEventListener("click", this.showSlidesCallback);
         return button;
     },
-    plusSlides : function(n) {
-        this.showSlides(this.activeSlide += n);
-    },
-    currentSlide: function(n) {
-        this.showSlides(this.activeSlide = n);
-    },
-    showSlides : function(n) {
-        var i;
-        var slides = document.getElementsByClassName("container");
-        // var dots = document.getElementsByClassName("dot");
-        if (n > slides.length) {this.activeSlide = 1}    
-        if (n < 1) {this.activeSlide = slides.length}
-        for (i = 0; i < slides.length; i++) {
-            slides[i].style.display = "none";   
-            slides[i].style.opacity = "0"; 
-        }
-        // for (i = 0; i < dots.length; i++) {
-        //     dots[i].className = dots[i].className.replace(" active", "");
-        // }
-        slides[this.activeSlide - 1].style.display = "block";  
-        slides[this.activeSlide - 1].style.opacity = "1";  
-        // dots[this.activeSlide-1].className += " active";
-    }
 });
 
 export { MovementButtons };

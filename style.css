@@ -1,12 +1,13 @@
 
 * {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0}
+body {font-family: Verdana, sans-serif; margin:0;}
 .slides {display: none}
 img {vertical-align: middle;}
 .carrousel-wrapper {
     max-width: 1000px;
     position: relative;
     margin: auto;
+    padding-top: 50px;
 }
 
 /* Caption text */
