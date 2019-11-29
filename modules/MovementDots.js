@@ -12,11 +12,11 @@ Object.assign(MovementDots.prototype, {
     render : function() {
         let dot = document.createElement("span");
         dot.classList.add("dot");
-        dot.addEventListener("click", this.showSlide);
+        dot.addEventListener("click", this.showSlide.bind(this));
         return dot;
     },
     showSlide : function(){
-        this.showSlideCallback(this.label);
+        this.showSlideCallback(this.label + 1);
     }
 });
 

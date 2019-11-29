@@ -34,14 +34,25 @@ Object.assign(CarouselComponent.prototype, {
 
     },
     renderElements : function(wrapper, array) {
-        $.each(array, function (index, value){
-            let image = value.render(index);
-            $(wrapper).append(image);
-        });
-
         let nextSlidesCallback = this.nextSlides.bind(this);
         let previousSlidesCallback = this.previousSlides.bind(this);
         let currentSlideCallback = this.currentSlide.bind(this);
+        //add dots + images
+        console.log(array);
+        let dotsWrapper = document.createElement("div");
+        dotsWrapper.style.textAlign = "center";
+
+        
+        $.each(array, function (index, value){
+            let image = value.render(index);
+            $(wrapper).append(image);
+            //add dots
+            let dot = new MovementDots(index, currentSlideCallback);
+            let dotElement = dot.render();
+            $(dotsWrapper).append(dotElement);
+        });
+
+        
         //add previous button
         let previous = new MovementButtons("prev", previousSlidesCallback);
         let previousButton = previous.render();
@@ -50,15 +61,7 @@ Object.assign(CarouselComponent.prototype, {
         let next = new MovementButtons("next", nextSlidesCallback);
         let nextButton = next.render();
         $(wrapper).append(nextButton);
-        //add dots
-        console.log(array);
-        let dotsWrapper = document.createElement("div");
-        dotsWrapper.style.textAlign = "center";
-        for (let i = 1; i<= array.length; i++){
-            let dot = new MovementDots(i, currentSlideCallback);
-            let dotElement = dot.render();
-            $(dotsWrapper).append(dotElement);
-        }
+        
         $(wrapper).append(dotsWrapper);
         this.currentSlide(this.activeSlide);
     },
