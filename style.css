@@ -3,6 +3,20 @@
 body {font-family: Verdana, sans-serif; margin:0;}
 .slides {display: none}
 img {vertical-align: middle;}
+.manual, .automatic, .both{
+  cursor:pointer;
+  background-color:#EC5500;
+  display:inline-block;
+  text-align:center;
+  padding: 5px;
+  margin:8px 30px;
+  width:90px;
+  height:35px;
+  border-radius:3px;
+  border-width:1px;
+  border-style:solid;
+  border-color:#E70000;
+}
 .carrousel-wrapper {
     max-width: 1000px;
     position: relative;

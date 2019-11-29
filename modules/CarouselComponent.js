@@ -10,7 +10,7 @@ function CarouselComponent(imagesArray){
     this.imgArray = [];
     this.activeSlide = 1;
     this.mode = null;
-    // this.init();
+    this.intervalId = null;
 }
 
 CarouselComponent.modes = {
@@ -34,9 +34,26 @@ Object.assign(CarouselComponent.prototype, {
         
     },
     renderElements : function(wrapper, array) {
+        //binders
         let nextSlidesCallback = this.nextSlides.bind(this);
         let previousSlidesCallback = this.previousSlides.bind(this);
         let currentSlideCallback = this.currentSlide.bind(this);
+        let manualCHangerCallback = this.manualMode.bind(this);
+        let automaticCHangerCallback = this.automaticMode.bind(this);
+        let bothCHangerCallback = this.bothMode.bind(this);
+        //// add manual mode changers
+        let manual = new MovementButtons("manual", manualCHangerCallback);
+        let manualButton = manual.render();
+        $(wrapper).append(manualButton);
+        //// add automatic mode changers
+        let automatic = new MovementButtons("automatic", automaticCHangerCallback);
+        let automaticButton = automatic.render();
+        $(wrapper).append(automaticButton);
+         //// add automatic mode changers
+         let both = new MovementButtons("both", bothCHangerCallback);
+         let bothButton = both.render();
+         $(wrapper).append(bothButton);
+
         //add dots + images
         console.log(array);
         let dotsWrapper = document.createElement("div");
@@ -62,21 +79,39 @@ Object.assign(CarouselComponent.prototype, {
         
         $(wrapper).append(dotsWrapper);
         this.currentSlide(this.activeSlide);
-        if(this.mode === CarouselComponent.modes.BOTH || this.mode === CarouselComponent.modes.AUTOMATIC)
+        
+        if(this.mode === CarouselComponent.modes.AUTOMATIC)
         {
-            this.automaticSlideMove(2000);
+            next.style.display = "none";
+            prev.style.display = "none";
         }
-        else{
-            clearInterval(window);
-        }
-    },
-    automaticSlideMove :  function(interval) {
-        let nextSlidesCallback = this.nextSlides.bind(this);
-            window.setInterval(function(){
-                nextSlidesCallback();
-              }, interval);
     },
     
+    automaticSlideMove :  function(interval = 2000) {
+        let nextSlidesCallback = this.nextSlides.bind(this);
+        let intervalId = window.setInterval(function(){
+                nextSlidesCallback();
+              }, interval);
+        this.intervalId =  intervalId;
+    },
+    manualMode : function(){
+        window.clearInterval(this.intervalId);
+        $(".prev")[0].style.display = "block";
+        $(".next")[0].style.display = "block";
+    },
+    automaticMode:  function(){
+        window.clearInterval(this.intervalId);
+        this.automaticSlideMove();
+        $(".prev")[0].style.display = "none";
+        $(".next")[0].style.display = "none";
+    },
+    bothMode : function(){
+        window.clearInterval(this.intervalId);
+        this.automaticSlideMove();
+        $(".prev")[0].style.display = "block";
+        $(".next")[0].style.display = "block";
+    },
+
     nextSlides : function() {
         this.showSlides(this.activeSlide += 1);
     },

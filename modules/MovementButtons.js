@@ -5,6 +5,7 @@ function MovementButtons(label, showSlideCallback){
     }
     this.label = label;
     this.showSlideCallback = showSlideCallback;
+    this.domReference = null;
 }
 
 
@@ -12,13 +13,20 @@ Object.assign(MovementButtons.prototype, {
     render : function() {
         let button = document.createElement("a");
         button.classList.add(this.label);
-        let directionImage = this.label === "prev" ? "❮" : "❯" ;
-        
+        button.classList.add("movementButtons");
+        let directionImage = this.label === "prev" ? "❮" :(this.label === "next"? "❯" : this.label) ;
         let insideText = document.createTextNode(directionImage);
         button.appendChild(insideText); 
         button.addEventListener("click", this.showSlideCallback);
+        this.domReference = button;
         return button;
     },
+    hideButton: function () {
+        this.domReference.style.display = "none";
+    },
+    showButtons: function(params) {
+        this.domReference.style.display = "block";
+    }
 });
 
 export { MovementButtons };
