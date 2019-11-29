@@ -68,6 +68,8 @@ Object.assign(CarouselComponent.prototype, {
             let dotElement = dot.render();
             $(dotsWrapper).append(dotElement);
         });
+        
+        $(wrapper).append(dotsWrapper);
         //add previous button
         let previous = new MovementButtons("prev", previousSlidesCallback);
         let previousButton = previous.render();
@@ -76,15 +78,8 @@ Object.assign(CarouselComponent.prototype, {
         let next = new MovementButtons("next", nextSlidesCallback);
         let nextButton = next.render();
         $(wrapper).append(nextButton);
-        
-        $(wrapper).append(dotsWrapper);
         this.currentSlide(this.activeSlide);
-        
-        if(this.mode === CarouselComponent.modes.AUTOMATIC)
-        {
-            next.style.display = "none";
-            prev.style.display = "none";
-        }
+        this.automaticSlideMove();
     },
     
     automaticSlideMove :  function(interval = 2000) {
