@@ -1,110 +1,146 @@
+* {
+  box-sizing: border-box
+}
 
-* {box-sizing: border-box}
-body {font-family: Verdana, sans-serif; margin:0;}
-.slides {display: none}
-img {vertical-align: middle;}
-.manual, .automatic, .both{
-  cursor:pointer;
-  background-color:#EC5500;
-  display:inline-block;
-  text-align:center;
+body {
+  font-family: Verdana, sans-serif;
+  margin: 0;
+}
+
+.slides {
+  display: none
+}
+
+img {
+  vertical-align: middle;
+}
+
+.manual,
+.automatic,
+.both {
+  cursor: pointer;
+  background-color: #EC5500;
+  display: inline-block;
+  text-align: center;
   padding: 5px;
-  margin:8px 30px;
-  width:90px;
-  height:35px;
-  border-radius:3px;
-  border-width:1px;
-  border-style:solid;
-  border-color:#E70000;
+  margin: 8px 30px;
+  width: 100px;
+  height: 35px;
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #E70000;
 }
-.manual{
-  margin:10px 30px 10px 28%;
+
+.manual {
+  margin: 10px 30px 10px 28%;
 }
+
 .carrousel-wrapper {
-    max-width: 1000px;
-    position: relative;
-    margin: auto;
-    padding-top: 50px;
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  padding-top: 50px;
 }
 
 /* Caption text */
 .text {
-    color: #f2f2f2;
-    font-weight: bolder;
-    font-size: 25px;
-    padding: 25px 12px;
-    position: absolute;
-    bottom: 8px;
-    width: 100%;
-    text-align: center;
+  color: #f2f2f2;
+  font-weight: bolder;
+  font-size: 25px;
+  padding: 25px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
 }
 
 
 /* Next & previous buttons */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    width: auto;
-    padding: 16px 0px;
-    margin-top: -22px;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
-    transition: 0.6s ease;
-    border-radius: 0 3px 3px 0;
-    user-select: none;
-  }
-  
-  /* Position the "next button" to the right */
+.prev,
 .next {
-    right: 0;
-    border-radius: 3px 0 0 3px;
-}
-  
-  /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
-    background-color: rgba(0,0,0,0.8);
-}
- .dots-wrapper{
-   display: flex;
-   margin: 10px 45%;
- } 
-/* The dots/bullets/indicators */
-.dot {
-    cursor: pointer;
-    height: 15px;
-    width: 15px;
-    margin: 0 2px;
-    background-color: #bbb;
-    border-radius: 50%;
-    display: flex;
-    transition: background-color 0.6s ease;
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px 0px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
 }
 
-.active, .dot:hover {
-    background-color: #717171;
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover,
+.next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.dots-wrapper {
+  display: flex;
+  margin: 10px 45%;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: flex;
+  transition: background-color 0.6s ease;
+}
+
+.active,
+.dot:hover {
+  background-color: #717171;
 }
 
 /* Fading animation */
 .fade {
-    -webkit-animation-name: fade;
-    -webkit-animation-duration: 1.5s;
-    animation-name: fade;
-    animation-duration: 1.5s;
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {
+    opacity: .4
   }
-  
-  @-webkit-keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
+
+  to {
+    opacity: 1
   }
-  
-  @keyframes fade {
-    from {opacity: .4} 
-    to {opacity: 1}
+}
+
+@keyframes fade {
+  from {
+    opacity: .4
   }
-  
-  /* On smaller screens, decrease text size */
-  @media only screen and (max-width: 300px) {
-    .prev, .next,.text {font-size: 11px}
+
+  to {
+    opacity: 1
   }
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+
+  .prev,
+  .next,
+  .text {
+    font-size: 11px
+  }
+}
