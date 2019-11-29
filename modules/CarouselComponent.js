@@ -30,8 +30,8 @@ Object.assign(CarouselComponent.prototype, {
             imgArray[index] = new Image(value);
         });
         this.mode = defaultMode;
-        this.renderElements(node, imgArray);
-
+        this.renderElements(node, imgArray);  
+        
     },
     renderElements : function(wrapper, array) {
         let nextSlidesCallback = this.nextSlides.bind(this);
@@ -51,8 +51,6 @@ Object.assign(CarouselComponent.prototype, {
             let dotElement = dot.render();
             $(dotsWrapper).append(dotElement);
         });
-
-        
         //add previous button
         let previous = new MovementButtons("prev", previousSlidesCallback);
         let previousButton = previous.render();
@@ -64,6 +62,19 @@ Object.assign(CarouselComponent.prototype, {
         
         $(wrapper).append(dotsWrapper);
         this.currentSlide(this.activeSlide);
+        if(this.mode === CarouselComponent.modes.BOTH || this.mode === CarouselComponent.modes.AUTOMATIC)
+        {
+            this.automaticSlideMove(2000);
+        }
+        else{
+            clearInterval(window);
+        }
+    },
+    automaticSlideMove :  function(interval) {
+        let nextSlidesCallback = this.nextSlides.bind(this);
+            window.setInterval(function(){
+                nextSlidesCallback();
+              }, interval);
     },
     
     nextSlides : function() {
