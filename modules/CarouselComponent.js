@@ -41,6 +41,7 @@ Object.assign(CarouselComponent.prototype, {
         let manualCHangerCallback = this.manualMode.bind(this);
         let automaticCHangerCallback = this.automaticMode.bind(this);
         let bothCHangerCallback = this.bothMode.bind(this);
+
         //// add manual mode changers
         let manual = new MovementButtons("manual", manualCHangerCallback);
         let manualButton = manual.render();
@@ -58,6 +59,7 @@ Object.assign(CarouselComponent.prototype, {
         console.log(array);
         let dotsWrapper = document.createElement("div");
         dotsWrapper.style.textAlign = "center";
+        dotsWrapper.classList.add("dots-wrapper");
 
         
         $.each(array, function (index, value){
