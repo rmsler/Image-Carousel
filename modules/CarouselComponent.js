@@ -30,27 +30,33 @@ Object.assign(CarouselComponent.prototype, {
       imgArray[index] = new Image(value);
     });
     this.mode = defaultMode;
+    this.bindCallbacks();
     this.renderElements(node, imgArray);
   },
+
+  bindCallbacks: function() {
+    this.nextSlidesCallback = this.nextSlides.bind(this);
+    this.previousSlidesCallback = this.previousSlides.bind(this);
+    //this.currentSlideCallback = this.currentSlide.bind(this);
+    this.manualCHangerCallback = this.manualMode.bind(this);
+    this.automaticCHangerCallback = this.automaticMode.bind(this);
+    this.bothCHangerCallback = this.bothMode.bind(this);
+  },
+
   renderElements: function(wrapper, array) {
-    //binders
-    let nextSlidesCallback = this.nextSlides.bind(this);
-    let previousSlidesCallback = this.previousSlides.bind(this);
+    //binder
     let currentSlideCallback = this.currentSlide.bind(this);
-    let manualCHangerCallback = this.manualMode.bind(this);
-    let automaticCHangerCallback = this.automaticMode.bind(this);
-    let bothCHangerCallback = this.bothMode.bind(this);
 
     //// add manual mode changers
-    let manual = new MovementButtons("manual", manualCHangerCallback);
+    let manual = new MovementButtons("manual", this.manualCHangerCallback);
     let manualButton = manual.render();
     $(wrapper).append(manualButton);
     //// add automatic mode changers
-    let automatic = new MovementButtons("automatic", automaticCHangerCallback);
+    let automatic = new MovementButtons("automatic", this.automaticCHangerCallback);
     let automaticButton = automatic.render();
     $(wrapper).append(automaticButton);
     //// add automatic mode changers
-    let both = new MovementButtons("both", bothCHangerCallback);
+    let both = new MovementButtons("both", this.bothCHangerCallback);
     let bothButton = both.render();
     $(wrapper).append(bothButton);
 
@@ -71,11 +77,11 @@ Object.assign(CarouselComponent.prototype, {
 
     $(wrapper).append(dotsWrapper);
     //add previous button
-    let previous = new MovementButtons("prev", previousSlidesCallback);
+    let previous = new MovementButtons("prev", this.previousSlidesCallback);
     let previousButton = previous.render();
     $(wrapper).append(previousButton);
     // add next button
-    let next = new MovementButtons("next", nextSlidesCallback);
+    let next = new MovementButtons("next", this.nextSlidesCallback);
     let nextButton = next.render();
     $(wrapper).append(nextButton);
     this.currentSlide(this.activeSlide);
@@ -108,23 +114,27 @@ Object.assign(CarouselComponent.prototype, {
   },
 
   nextSlides: function() {
-    this.showSlides((this.activeSlide += 1));
+    this.activeSlide += 1;
+    this.showSlides();
   },
   previousSlides: function() {
-    this.showSlides((this.activeSlide -= 1));
+    this.activeSlide -= 1;
+    this.showSlides();
   },
   currentSlide: function(n) {
-    this.showSlides((this.activeSlide = n));
+    this.activeSlide = n;
+    this.showSlides();
   },
 
-  showSlides: function(n) {
+  showSlides: function() {
+    let currentSlide = this.activeSlide;
     var i;
     var slides = document.getElementsByClassName("container");
     var dots = document.getElementsByClassName("dot");
-    if (n > slides.length) {
+    if (currentSlide > slides.length) {
       this.activeSlide = 1;
     }
-    if (n < 1) {
+    if (currentSlide < 1) {
       this.activeSlide = slides.length;
     }
     for (i = 0; i < slides.length; i++) {
