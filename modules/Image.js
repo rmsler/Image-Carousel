@@ -8,18 +8,6 @@ function Image(config) {
   this.domReference = null;
 }
 Object.assign(Image.prototype, {
-  onClick: function(event) {
-    // console.log("clasName: "+ event.target.className);
-    this.state = !this.state;
-    this.changeStateCallback(event.target.className);
-    this.updateVisual();
-  },
-
-  updateVisual: function() {
-    this.domReference.classList.remove(String(!this.state));
-    this.domReference.classList.add(String(this.state));
-  },
-
   render: function(labelNo) {
     let label = "image" + labelNo;
     //container element
