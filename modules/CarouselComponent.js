@@ -24,8 +24,6 @@ Object.assign(CarouselComponent.prototype, {
     //iterate and construct models
     let defaultMode = CarouselComponent.modes.BOTH;
     let imgArray = this.imgArray;
-    console.log(this.imagesArray);
-    // let changeModeCallback = this.clickimage.bind(this);
     $.each(this.imagesArray["carousel"], function(index, value) {
       imgArray[index] = new Image(value);
     });
@@ -61,7 +59,6 @@ Object.assign(CarouselComponent.prototype, {
     $(wrapper).append(bothButton);
 
     //add dots + images
-    console.log(array);
     let dotsWrapper = document.createElement("div");
     dotsWrapper.style.textAlign = "center";
     dotsWrapper.classList.add("dots-wrapper");
