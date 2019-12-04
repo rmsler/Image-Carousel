@@ -19,12 +19,6 @@ Object.assign(MovementButtons.prototype, {
     button.addEventListener("click", this.showSlideCallback);
     this.domReference = button;
     return button;
-  },
-  hideButton: function() {
-    this.domReference.style.display = "none";
-  },
-  showButtons: function(params) {
-    this.domReference.style.display = "block";
   }
 });
 

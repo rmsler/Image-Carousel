@@ -93,30 +93,40 @@ Object.assign(CarouselComponent.prototype, {
     this.intervalId = intervalId;
   },
   manualMode: function() {
+    this.mode = CarouselComponent.modes.MANUAL;
     window.clearInterval(this.intervalId);
     $(".prev")[0].style.display = "block";
     $(".next")[0].style.display = "block";
   },
   automaticMode: function() {
+    this.mode = CarouselComponent.modes.AUTOMATIC;
     window.clearInterval(this.intervalId);
     this.automaticSlideMove();
     $(".prev")[0].style.display = "none";
     $(".next")[0].style.display = "none";
   },
   bothMode: function() {
+    this.mode = CarouselComponent.modes.BOTH;
     window.clearInterval(this.intervalId);
     this.automaticSlideMove();
     $(".prev")[0].style.display = "block";
     $(".next")[0].style.display = "block";
   },
-
+  restartSliders: function(){
+    if(this.mode !== CarouselComponent.modes.MANUAL){
+      window.clearInterval(this.intervalId);
+      this.automaticSlideMove();
+    }
+  },
   nextSlides: function() {
     this.activeSlide += 1;
     this.showSlides();
+    this.restartSliders();
   },
   previousSlides: function() {
     this.activeSlide -= 1;
     this.showSlides();
+    this.restartSliders();
   },
   currentSlide: function(n) {
     this.activeSlide = n;
